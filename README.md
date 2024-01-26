@@ -1,4 +1,4 @@
-# TLA-linear-ascent
+# TLA and linear ascent
 
 Implementations of main experiments for paper
 
