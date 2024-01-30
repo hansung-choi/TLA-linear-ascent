@@ -9,14 +9,13 @@ from torch.nn import Parameter
 import torch.nn.init as init
 
 
-#code is from https://github.com/kaidic/LDAM-DRW/blob/master/models/resnet_cifar.py#L74
 # Deep Residual Learning for Image Recognition. arXiv:1512.03385
 #only minor change for setting color channel, num_class
 """
-
-
-
-
+Reference:
+    [1] K. He, X. Zhang, S. Ren, and J. Sun, “Deep residual learning for
+    image recognition,” IEEE Conference on Computer Vision and Pattern
+    Recognition, pp. 770–778, 2016.
 """
 
 
