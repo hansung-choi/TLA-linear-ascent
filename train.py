@@ -369,7 +369,6 @@ def train_minimax(model, data_load_dict, criterion, optimizer, num_epoch,
 
 
     train_loader = data_load_dict["train_loader"]
-    #validation_loader = data_load_dict["eval_val_loader"]
     validation_loader = data_load_dict["val_loader"]
     test_dataloader = data_load_dict["test_loader"]
 
