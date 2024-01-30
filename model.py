@@ -9,32 +9,15 @@ from torch.nn import Parameter
 import torch.nn.init as init
 
 
-class Gaussian_NN(nn.Module):
-
-    def __init__(self,input_dim,output_dim,w1=100,w2=100):
-        super().__init__()
-        self.sequence = []
-        self.Linear1 = nn.Linear(input_dim,w1)
-        self.sequence.append(self.Linear1)
-        self.ReLU1=nn.ReLU()
-        self.sequence.append(self.ReLU1)
-        self.Linear2=nn.Linear(w1,w2)
-        self.sequence.append(self.Linear2)
-        self.ReLU2=nn.ReLU()
-        self.sequence.append(self.ReLU2)
-        self.Linear3=nn.Linear(w2,output_dim)
-        self.sequence.append(self.Linear3)
-
-    def forward(self,x):
-        out = x
-        for i in range(len(self.sequence)):
-            out = self.sequence[i](out)
-        return out
-
-
 #code is from https://github.com/kaidic/LDAM-DRW/blob/master/models/resnet_cifar.py#L74
 # Deep Residual Learning for Image Recognition. arXiv:1512.03385
 #only minor change for setting color channel, num_class
+"""
+
+
+
+
+"""
 
 
 class NormedLinear(nn.Module):
