@@ -1,6 +1,6 @@
-# TLA and linear ascent
+# TLA and linear ascent 
 
-Implementations of main experiments for paper
+Implementations of main experiments for the paper "Minimax Learning from Class-Imbalanced Data"
 
 ## Requirements
 1. python 3.8.5
