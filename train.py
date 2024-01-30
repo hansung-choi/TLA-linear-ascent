@@ -41,7 +41,7 @@ def get_minimax_schedular(optimizer, initial_lr):
 def get_criterion(args,class_sample_num_dict,device):
     '''
     Most hyperparameters are from VS-loss paper for fair comparison.
-    [4] G. R. Kini, O. Paraskevas, S. Oymak, and C. Thrampoulidis, “Labelimbalanced
+    [1] G. R. Kini, O. Paraskevas, S. Oymak, and C. Thrampoulidis, “Labelimbalanced
     and group-sensitive classification under overparameterization,”
     Advances in Neural Information Processing Systems, vol. 34, pp. 18 970–
     18 983, 2021.
