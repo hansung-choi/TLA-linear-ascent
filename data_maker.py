@@ -12,7 +12,6 @@ Reference:
     loss functions for imbalanced data. Advances in Neural Information Processing Systems, 34:3163–3177, 2021.
     [2] Kaidi Cao, Colin Wei, Adrien Gaidon, Nikos Arechiga, and Tengyu Ma. Learning imbalanced datasets with
     label-distribution-aware margin loss. Advances in neural information processing systems, 32, 2019.
-    to compare results in the same data setting
 '''
 
 def make_data_loaders(args):
