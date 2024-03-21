@@ -25,7 +25,7 @@ From CE to VS: Use the 'plain' train method.
 
 LDAM: The 'DRW' train method can be used.
 
-From TWCE_linear_ascent to TLA_linear_ascent: Use the 'minimax' train method.
+From TWCE_EGA to TLA_linear_ascent: Use the 'minimax' train method.
 
 
 
