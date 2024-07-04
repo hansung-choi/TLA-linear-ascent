@@ -1,6 +1,6 @@
 # TLA and linear ascent 
 
-Implementations of main experiments for the paper "Minimax Learning from Class-Imbalanced Data"
+Implementations of main experiments for the paper "Deep Minimax Classifier for Imbalanced Datasets with Small Number of Minority Samples"
 
 ## Requirements
 1. python 3.8.5
