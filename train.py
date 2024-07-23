@@ -59,6 +59,8 @@ def get_criterion(args,class_sample_num_dict,device):
         criterion = FocalLoss(balanced_class_rate(num_train_samples).to(device))
     elif loss_function_name == 'LDAM':
         criterion = LDAMLoss(num_train_samples)
+    elif loss_function_name == 'GML':
+        criterion = GMLoss()
     elif loss_function_name == 'VS':
         if args.data_name == 'CIFAR10':
             if args.imbalance_type == 'step':
