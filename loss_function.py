@@ -27,21 +27,31 @@ Reference:
     and group-sensitive classification under overparameterization,”
     Advances in Neural Information Processing Systems, vol. 34, pp. 18 970–
     18 983, 2021.
+
+    GMLoss
+    [5] Du, Y., & Wu, J, "No one left behind: Improving the worst categories in long-tailed learning," 
+    In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition, pp. 15804-15813, 2023.
     
     TWCE and EGA method
-    [5] R. Alaiz-Rodr´ıguez, A. Guerrero-Curieses, and J. Cid-Sueiro, “Minimax
+    [6] R. Alaiz-Rodr´ıguez, A. Guerrero-Curieses, and J. Cid-Sueiro, “Minimax
     classifiers based on neural networks,” Pattern Recognition, vol. 38, no. 1,
-    pp. 29–39, 2005.
-    [6] R. Alaiz-Rodrıguez, A. Guerrero-Curieses, and J. Cid-Sueiro, “Minimax
+    pp. 29–39, 2005 (TWCE + EGA).
+    [7] R. Alaiz-Rodrıguez, A. Guerrero-Curieses, and J. Cid-Sueiro, “Minimax
     regret classifier for imprecise class distributions,” Journal of Machine
-    Learning Research, vol. 8, pp. 103–130, 2007.
-    [7] S. Sagawa, P. W. Koh, T. B. Hashimoto, and P. Liang, “Distributionally
+    Learning Research, vol. 8, pp. 103–130, 2007 (TWCE + EGA).
+    [8] S. Sagawa, P. W. Koh, T. B. Hashimoto, and P. Liang, “Distributionally
     robust neural networks for group shifts: On the importance of regularization
     for worst-case generalization,” International Conference on Learning
-    Representations, 2020.
-    [8] J. Zhang, A. Menon, A. Veit, S. Bhojanapalli, S. Kumar, and S. Sra, “Coping
+    Representations, 2020 (TWCE + EGA).
+    [9] J. Zhang, A. Menon, A. Veit, S. Bhojanapalli, S. Kumar, and S. Sra, “Coping
     with label shift via distributionally robust optimisation,” International
-    Conference on Learning Representations, 2021.
+    Conference on Learning Representations, 2021 (TWCE + EGA).
+    [10] B. Li and W. Liu, “Wat: improve the worst-class robustness in adversarial
+    training,” in Proceedings of the AAAI Conference on Artificial Intelligence,
+    vol. 37, no. 12, pp. 14 982–14 990, 2023 (weighting + EGA).
+    [11] J. Wei, H. Narasimhan, E. Amid, W.-S. Chu, Y. Liu, and A. Kumar, “Distributionally
+    robust post-hoc classifiers under prior shifts,” International
+    Conference on Learning Representations, 2023 (EGA method only).
 '''
 
 
@@ -157,6 +167,50 @@ class VSLoss(nn.Module):
         output = x / self.Delta_list + self.iota_list
 
         return F.cross_entropy(output, target, weight=self.weight)
+
+class GMLoss(nn.Module):
+
+    def __init__(self):
+        super(GMLoss, self).__init__()
+
+    def forward(self, x, target):
+
+        # calculate class_num_vector
+        c = x.shape[1]
+        y = target.view(-1)
+        one_hot_label_matrix = F.one_hot(y, num_classes=c)
+        class_num_vector = torch.sum(one_hot_label_matrix,dim=0)
+
+
+        # calculate p^i_j = N_j * exp(o^i_j) / sum(N_c * exp(o^i_c)
+        
+        unnormalized_p = torch.exp(x) * class_num_vector.unsqueeze(dim=0) #sim num2
+        p = unnormalized_p / torch.sum(unnormalized_p,dim=1).unsqueeze(dim=1)
+        
+
+        # calculate class accuracy p_c
+        valid_p = p * one_hot_label_matrix
+        clipped_class_num_vector = class_num_vector.clone().detach()
+        for i in range(c):
+            if class_num_vector[i] <= 0.:
+                clipped_class_num_vector[i] = 1
+        
+        p_c = torch.sum(valid_p, dim=0) / clipped_class_num_vector
+
+        # for excluding log(0) = NaN
+        invalid_class_num = 0.
+        for i in range(c):
+            if class_num_vector[i] <= 0.:
+                invalid_class_num += 1.
+                p_c[i] = 1.
+
+        # calculate GML loss, excepting classes not in minibatch
+        log_p_c = torch.log(p_c)
+
+        loss = -1. * torch.sum(log_p_c) / c 
+
+        return loss
+
 
 class TWCE_EGA(nn.Module):
     def __init__(self,
