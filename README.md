@@ -18,10 +18,10 @@ Implementations of main experiments for the paper "Deep Minimax Classifier for I
 3. t: imbalance type (possible value: LT and step)
 4. r: imbalance ratio (possible value: 0.2, 0.1, and 0.01)
 5. train_method: plain (Only SGD used), DRW, minimax
-6. loss_function: CE, WCE, Focal, Focal_alpha, LDAM, LA, VS, TWCE_EGA, TWCE_linear_ascent, TLA_EGA, and TLA_linear_ascent
+6. loss_function: CE, WCE, Focal, Focal_alpha, LDAM, LA, VS, GML, TWCE_EGA, TWCE_linear_ascent, TLA_EGA, and TLA_linear_ascent
 
 
-From CE to VS: Use the 'plain' train method.
+From CE to GML: Use the 'plain' train method.
 
 LDAM: The 'DRW' train method can be used.
 
