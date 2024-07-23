@@ -25,7 +25,7 @@ model_name_list = ['Resnet32']
 
 # loss function
 
-plain_loss_function_list = ['CE','WCE','Focal','Focal_alpha','LDAM','LA','VS']
+plain_loss_function_list = ['CE','WCE','Focal','Focal_alpha','LDAM','LA','VS','GML']
 minimax_loss_function_list = ['TWCE_EGA','TWCE_linear_ascent',
                                     'TLA_EGA','TLA_linear_ascent']
 loss_function_list = plain_loss_function_list + minimax_loss_function_list
