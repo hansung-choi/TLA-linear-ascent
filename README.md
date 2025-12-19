@@ -1,6 +1,6 @@
 # TLA and linear ascent 
 
-Implementations of main experiments for the paper "Deep Minimax Classifiers for Imbalanced Datasets with a Small Number of Minority Samples"
+Implementations of main experiments for the paper "Deep Minimax Classifiers for Imbalanced Datasets with a Small Number of Minority Samples" published in IEEE Journal of Selected Topics in Signal Processing (https://ieeexplore.ieee.org/abstract/document/10908081).
 
 ## Requirements
 1. python 3.8.5
